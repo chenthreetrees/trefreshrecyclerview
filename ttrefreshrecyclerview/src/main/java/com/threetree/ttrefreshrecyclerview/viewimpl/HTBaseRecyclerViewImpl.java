@@ -40,6 +40,8 @@ abstract class HTBaseRecyclerViewImpl extends HTBaseRecyclerView {
     protected boolean mHasSendCancelEvent;
     protected boolean mAutoRefresh;
 
+    private boolean isItemMove;
+
     public HTBaseRecyclerViewImpl(Context context)
     {
         super(context);
@@ -324,7 +326,14 @@ abstract class HTBaseRecyclerViewImpl extends HTBaseRecyclerView {
             {
                 stopLoadMoreAnimation();
                 mScreenFilled = isCurrentItemSizeOver(false);
-                hideLoadMoreView(!mScreenFilled);
+                if(isItemMove)
+                {
+                    hideLoadMoreView(true);
+                }else
+                {
+                    hideLoadMoreView(!mScreenFilled);
+                }
+                isItemMove = false;
                 mStartPosition = 0;
                 mItemCount = 0;
             }
@@ -342,6 +351,7 @@ abstract class HTBaseRecyclerViewImpl extends HTBaseRecyclerView {
             @Override
             public void onItemRemoved(int positionStart, int itemCount)
             {
+                isItemMove = true;
                 mStartPosition = positionStart;//处理动画删除item时的loadMore的显示问题
                 mItemCount = itemCount;
             }

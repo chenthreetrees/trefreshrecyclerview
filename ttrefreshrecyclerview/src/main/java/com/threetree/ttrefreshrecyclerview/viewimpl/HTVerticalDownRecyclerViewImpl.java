@@ -15,6 +15,7 @@ import android.view.MotionEvent;
  */
 public class HTVerticalDownRecyclerViewImpl extends HTVerticalRecyclerViewImpl {
 
+
     public HTVerticalDownRecyclerViewImpl(Context context) {
         super(context);
     }
@@ -27,8 +28,7 @@ public class HTVerticalDownRecyclerViewImpl extends HTVerticalRecyclerViewImpl {
         super(context, attrs, defStyleAttr);
     }
 
-
-    @Override
+     @Override
     public Boolean handleMoveAction(MotionEvent event) {
         float offsetX = mHTViewHolderTracker.getOffsetX();
         float offsetY = mHTViewHolderTracker.getRealOffsetXY();
